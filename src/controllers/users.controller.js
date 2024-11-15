@@ -35,11 +35,12 @@ const loginValidation = async (req, res) => {
         }
 
         const connection = await getConnection();
-        const result = await connection.query("SELECT id, email, password FROM users WHERE email = ? AND password = ?", [email, password]);
+        const result = await connection.query("SELECT id, email FROM users WHERE email = ? AND password = ?", [email, password]);
         
         if (result.length > 0) {
             const user = result[0];
             res.json(user);
+
         } else {
             res.json({ message: "Credeniales incorrectas. Verifique e inténtelo nuevamente."});
         }
@@ -72,10 +73,13 @@ const addUser = async (req, res) => {
 
 // UPDATE users
 const updateUser = async (req, res) => {
+    console.log("incia la funcion");
     try {
         const { id } = req.params;
 
         const { username, email, password, names, lastNames, country, city } = req.body;
+
+        console.log("Valores inciales: ",id, username, email, password, names, lastNames, country, city);
 
         // Validation
         if (email === undefined || password === undefined || names === undefined || 
@@ -84,6 +88,8 @@ const updateUser = async (req, res) => {
         }
 
         const user = { id, username, email, password, names, lastNames, country, city };
+
+        console.log("Valores finales: ",id, username, email, password, names, lastNames, country, city);
 
         const connection = await getConnection();
         const result = await connection.query("UPDATE users SET ? WHERE id = ?",[user, id]);
