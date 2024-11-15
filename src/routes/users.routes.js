@@ -10,7 +10,7 @@ router.get("/:id", usersController.getUserById); // Find By Id
 router.post("/", usersController.addUser); // Add user
 router.post("/login", usersController.loginValidation); // Login Validation
 
-router.put("/:id", usersController.updateUser); // Edit user
+router.put("/edit/:id", usersController.updateUser); // Edit user
 router.delete("/:id", usersController.deleteUser); // Delete user
 
 export default router;
