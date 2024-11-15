@@ -5,8 +5,9 @@ const router = Router();
 
 // Routes
 router.get("/", usersController.getUsers); // Find All
-router.get("/:username", usersController.getUsersById); // Find By Id
+router.get("/:id", usersController.getUsersById); // Find By Id
 router.post("/", usersController.addUsers); // Add user
+router.put("/:id", usersController.updateUser); // Edit user
 
 
 export default router;
