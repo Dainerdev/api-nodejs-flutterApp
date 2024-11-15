@@ -12,7 +12,7 @@ const getUsers = async (req, res) => {
 };
 
 // GET Users By Id
-const getUsersById = async (req, res) => {
+const getUserById = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -25,7 +25,7 @@ const getUsersById = async (req, res) => {
 };
 
 // POST users
-const addUsers = async (req, res) => {
+const addUser = async (req, res) => {
     try {
         const { username, email, password, names, lastNames, country, city } = req.body;
 
@@ -68,9 +68,22 @@ const updateUser = async (req, res) => {
     }
 };
 
+// DELETE Users By Id
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const connection = await getConnection();
+        const result = await connection.query("SELECT * FROM users WHERE id = ?", id);
+        res.json(result);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
 export const methods = {
     getUsers,
-    getUsersById,
-    addUsers,
+    getUserById,
+    addUser,
     updateUser
 }

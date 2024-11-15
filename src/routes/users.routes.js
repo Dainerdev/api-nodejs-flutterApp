@@ -5,8 +5,8 @@ const router = Router();
 
 // Routes
 router.get("/", usersController.getUsers); // Find All
-router.get("/:id", usersController.getUsersById); // Find By Id
-router.post("/", usersController.addUsers); // Add user
+router.get("/:id", usersController.getUserById); // Find By Id
+router.post("/", usersController.addUser); // Add user
 router.put("/:id", usersController.updateUser); // Edit user
 
 
