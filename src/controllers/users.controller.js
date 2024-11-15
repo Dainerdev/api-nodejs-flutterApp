@@ -24,6 +24,31 @@ const getUserById = async (req, res) => {
     }
 };
 
+// Login Validation
+const loginValidation = async (req, res) => {
+
+    try {
+        const { email, password } = req.body;
+
+        if ( !email || !password) {
+            res.status(400).json({ message: "Por favor, ingrese los datos de usuario." });
+        }
+
+        const connection = await getConnection();
+        const result = await connection.query("SELECT id, email, password FROM users WHERE email = ? AND password = ?", [email, password]);
+        
+        if (result.length > 0) {
+            const user = result[0];
+            res.json(user);
+        } else {
+            res.json({ message: "Credeniales incorrectas. Verifique e inténtelo nuevamente."});
+        }
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
 // POST users
 const addUser = async (req, res) => {
     try {
@@ -85,6 +110,7 @@ export const methods = {
     getUsers,
     getUserById,
     addUser,
+    loginValidation,
     updateUser,
     deleteUser
 }
