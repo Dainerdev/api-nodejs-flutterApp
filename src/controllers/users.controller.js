@@ -79,8 +79,6 @@ const updateUser = async (req, res) => {
 
         const { username, email, password, names, lastNames, country, city } = req.body;
 
-        console.log("Valores inciales: ",id, username, email, password, names, lastNames, country, city);
-
         // Validation
         if (email === undefined || password === undefined || names === undefined || 
             lastNames === undefined || country === undefined || city === undefined) {
@@ -88,8 +86,6 @@ const updateUser = async (req, res) => {
         }
 
         const user = { id, username, email, password, names, lastNames, country, city };
-
-        console.log("Valores finales: ",id, username, email, password, names, lastNames, country, city);
 
         const connection = await getConnection();
         const result = await connection.query("UPDATE users SET ? WHERE id = ?",[user, id]);
@@ -106,6 +102,7 @@ const deleteUser = async (req, res) => {
 
         const connection = await getConnection();
         const result = await connection.query("DELETE FROM users WHERE id = ?", id);
+
         res.json(result);
     } catch (error) {
         res.status(500).send(error.message);
