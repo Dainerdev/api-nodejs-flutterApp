@@ -35,7 +35,7 @@ const loginValidation = async (req, res) => {
         }
 
         const connection = await getConnection();
-        const result = await connection.query("SELECT id, email FROM users WHERE email = ? AND password = ?", [email, password]);
+        const result = await connection.query("SELECT id, email, names FROM users WHERE email = ? AND password = ?", [email, password]);
         
         if (result.length > 0) {
             const user = result[0];
