@@ -4,6 +4,8 @@ import cors from "cors";
 
 // Routes
 import usersRoutes from "./routes/users.routes";
+import earningsRoutes from "./routes/earnings.routes";
+import expensesRoutes from "./routes/expenses.routes";
 
 const app = express();
 
@@ -17,5 +19,7 @@ app.use(cors());
 
 // Routes
 app.use("/api/users", usersRoutes);
+app.use("/api/earnings", earningsRoutes);
+app.use("/api/expenses", expensesRoutes);
 
 export default app;
